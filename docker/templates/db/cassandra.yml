@@ -1,0 +1,9 @@
+services:
+  cassandra:
+    image: cassandra:latest
+    container_name: dev-cassandra
+    restart: "no"
+    ports:
+      - "9042:9042"
+    volumes:
+      - /docker/db/cassandra:/var/lib/cassandra

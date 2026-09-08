@@ -1,0 +1,13 @@
+services:
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    container_name: dev-opensearch
+    restart: "no"
+    environment:
+      discovery.type: single-node
+      DISABLE_SECURITY_PLUGIN: "true"
+      OPENSEARCH_JAVA_OPTS: -Xms1g -Xmx1g
+    ports:
+      - "9201:9200"
+    volumes:
+      - /docker/search/opensearch:/usr/share/opensearch/data
