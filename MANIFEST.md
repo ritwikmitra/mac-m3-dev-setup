@@ -63,6 +63,7 @@
 - OpenSearch
 - ClickHouse
 - Qdrant
+- n8n
 
 - Real writable projects: `~/projects`
 - Real writable Docker data: `~/docker`

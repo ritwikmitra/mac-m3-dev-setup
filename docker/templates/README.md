@@ -17,5 +17,6 @@ Suggested defaults:
 - OpenSearch: localhost:9201
 - ClickHouse HTTP: localhost:8123
 - Qdrant: localhost:6333
+- n8n: http://localhost:5678
 
 Images use `latest` intentionally for a development template. Pin an image tag in a real project when reproducibility matters.

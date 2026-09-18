@@ -8,7 +8,7 @@ if [[ ! -d "/Applications/Docker.app" ]]; then
   brew install --cask docker-desktop
 fi
 
-mkdir -p "$HOME/docker/db" "$HOME/docker/messaging" "$HOME/docker/search" "$HOME/docker/analytics" "$HOME/docker/vector" "$HOME/docker/compose"
+mkdir -p "$HOME/docker/db" "$HOME/docker/messaging" "$HOME/docker/search" "$HOME/docker/analytics" "$HOME/docker/vector" "$HOME/docker/automation/n8n" "$HOME/docker/compose"
 
 cat > "$HOME/docker/README.md" <<'README'
 # Local Docker data
@@ -20,6 +20,7 @@ Persistent local development data lives here. Compose definitions normally live 
 - `search/` - Elasticsearch, OpenSearch
 - `analytics/` - ClickHouse
 - `vector/` - Qdrant
+- `automation/` - n8n
 - `compose/` - shared Compose assets
 
 Nothing in this directory is started automatically by the bootstrap.
@@ -109,12 +110,18 @@ services:
     profiles: [qdrant]
     ports: ["6333:6333", "6334:6334"]
     volumes: ["/docker/vector/qdrant:/qdrant/storage"]
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    profiles: [n8n]
+    ports: ["5678:5678"]
+    volumes: ["/docker/automation/n8n:/home/node/.n8n"]
 COMPOSE
 
 cat > "$HOME/tools/bin/docker-local-up" <<'CMD'
 #!/usr/bin/env bash
 set -Eeuo pipefail
-service="${1:?Usage: docker-local-up <postgres|mysql|redis|mongodb|cassandra|kafka|elasticsearch|opensearch|clickhouse|qdrant>}"
+service="${1:?Usage: docker-local-up <postgres|mysql|redis|mongodb|cassandra|kafka|elasticsearch|opensearch|clickhouse|qdrant|n8n>}"
 cd /projects/experiments/local-infrastructure
 docker compose --profile "$service" up -d "$service"
 CMD

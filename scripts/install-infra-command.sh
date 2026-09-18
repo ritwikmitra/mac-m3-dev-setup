@@ -4,7 +4,7 @@ mkdir -p "$HOME/tools/bin"
 cat > "$HOME/tools/bin/docker-template" <<'CMD'
 #!/usr/bin/env bash
 set -Eeuo pipefail
-name="${1:?Usage: docker-template <postgres|mysql|redis|mongodb|cassandra|kafka|elasticsearch|opensearch|clickhouse|qdrant>}"
+name="${1:?Usage: docker-template <postgres|mysql|redis|mongodb|cassandra|kafka|elasticsearch|opensearch|clickhouse|qdrant|n8n>}"
 base="/docker/compose"
 dest="/projects/experiments/local-infrastructure/${name}.yml"
 case "$name" in
@@ -13,6 +13,7 @@ case "$name" in
   elasticsearch|opensearch) src="$base/search/$name.yml" ;;
   clickhouse) src="$base/analytics/clickhouse.yml" ;;
   qdrant) src="$base/vector/qdrant.yml" ;;
+  n8n) src="$base/automation/n8n.yml" ;;
   *) echo "Unknown template: $name" >&2; exit 1 ;;
 esac
 mkdir -p /projects/experiments/local-infrastructure

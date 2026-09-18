@@ -174,7 +174,8 @@ Persistent data lives under:
 ├── messaging/kafka/
 ├── search/{elasticsearch,opensearch}/
 ├── analytics/clickhouse/
-└── vector/qdrant/
+├── vector/qdrant/
+└── automation/n8n/
 ```
 
 Compose definitions live under `/projects/experiments/local-infrastructure`.
@@ -187,6 +188,8 @@ docker-local-down postgres
 
 docker-local-up redis
 docker-local-up qdrant
+docker-local-up n8n
+docker-local-down n8n
 ```
 
 Or generate a standalone template:
@@ -195,6 +198,7 @@ Or generate a standalone template:
 docker-template postgres
 docker-template kafka
 docker-template qdrant
+docker-template n8n
 ```
 
 Nothing is started automatically.

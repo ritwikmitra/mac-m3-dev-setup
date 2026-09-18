@@ -23,6 +23,7 @@ mkdir -p \
   "$HOME/docker/search/opensearch" \
   "$HOME/docker/analytics/clickhouse" \
   "$HOME/docker/vector/qdrant" \
+  "$HOME/docker/automation/n8n" \
   "$HOME/docker/compose"
 
 cp -n "$ROOT_DIR/docker/templates/README.md" "$HOME/docker/README.md" 2>/dev/null || true
